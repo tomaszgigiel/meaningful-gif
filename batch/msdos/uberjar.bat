@@ -1,4 +1,6 @@
-cd %~dp0/../..
+md "%HOMEPATH%\_delete_content\"
+pushd %~dp0\..\..
 rmdir /s /q target
-start lein do clean, uberjar
+call lein do clean, uberjar
 pause
+popd
