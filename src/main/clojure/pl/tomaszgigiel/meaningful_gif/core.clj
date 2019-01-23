@@ -3,15 +3,17 @@
   (:import java.io.FileOutputStream)
   (:import pl.tomaszgigiel.streams.AGifOutputStream)
   (:import pl.tomaszgigiel.streams.Base64OutputStream)
+  (:import pl.tomaszgigiel.streams.ChunkOutputStream)
   (:import pl.tomaszgigiel.streams.FountainCodeOutputStream)
   (:import pl.tomaszgigiel.streams.PipedInputStream)
+  (:import pl.tomaszgigiel.streams.QRCodeOutputStream)
   (:import pl.tomaszgigiel.streams.ZipOutputStream)
   (:require [clojure.tools.logging :as log])
   (:require [pl.tomaszgigiel.meaningful-gif.cmd :as cmd])
   (:require [pl.tomaszgigiel.utils.misc :as misc])
   (:gen-class))
 
-(defn meaningful-gif [file-name-props]
+(defn- meaningful-gif [file-name-props]
   (let [props (misc/load-props file-name-props)
         path-input (-> props :input misc/replace-variable-environment)
         path-output (-> props :output misc/replace-variable-environment)]
@@ -19,6 +21,8 @@
                     FileOutputStream.
                     BufferedOutputStream.
                     AGifOutputStream.
+                    QRCodeOutputStream.
+                    ChunkOutputStream.
                     FountainCodeOutputStream.
                     Base64OutputStream.
                     ZipOutputStream.)]

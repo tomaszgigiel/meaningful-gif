@@ -1,70 +1,24 @@
 (ns pl.tomaszgigiel.streams.AGifOutputStream
+  (:import java.io.OutputStream)
+  (:require [pl.tomaszgigiel.agif.agif :as agif])
   (:gen-class
     :name pl.tomaszgigiel.streams.AGifOutputStream
     :extends java.io.FilterOutputStream
     :state state
     :init init
-    :constructors {[java.io.OutputStream] [java.io.OutputStream] [java.io.OutputStream long] [java.io.OutputStream]}
-    :exposes {out {:get getOut :set setOut}}
+    :constructors {[java.io.OutputStream] [java.io.OutputStream]}
+    :exposes-methods {flush flushSuper}
     :main false))
 
 (defn -init
-  ([^java.io.OutputStream out] [[out] (ref {:buf (byte-array 100) :count 0 :size 100})])
-  ([^java.io.OutputStream out ^long size] [[out] (ref {:buf (byte-array size) :count 0 :size size})]))
+  ([^OutputStream out] [[out] (ref {:image-writer (agif/begin out)})]))
 
-(defn- transformed [buf count]
-  {:buf buf :count count})
+(defn -write [^OutputStream this ^long b]
+  (throw (UnsupportedOperationException. "Only bytes with a one gif picture")))
 
-(defn- flush-buffer [out buf count]
-  (if (pos? count)
-    (let [t (transformed buf count)] (.write out (:buf t) 0 (:count t)))))
+(defn -write [^OutputStream this ^bytes b ^long off ^long len]
+  (dosync (agif/write-bytes b off len (:image-writer @(.state this)) 300 10)))
 
-(defn- write-byte [out buf count size b]
-  (let [buf-full? (= count size)
-        position (if buf-full? 0 count)]
-    (if buf-full? (flush-buffer out buf size))
-    (aset-byte buf position b)
-    {:buf buf :count (+ position 1) :size size}))
+(defn -flush [^OutputStream this] (.flushSuper this))
 
-(defn- write-array [out buf count size b off len]
-  (loop [buf-full? (= count size)
-         position (if buf-full? 0 count)
-         chunk (if (<= (+ position len) size) len (- size position))
-         off-current off
-         len-new (- len chunk)]
-    (if buf-full? (flush-buffer out buf size))
-    (System/arraycopy b off-current buf position chunk)
-    (if (pos? len-new)
-      (recur (boolean true) 0 (min len-new size) (+ off-current chunk) (- len-new chunk))
-      {:buf buf :count chunk :size size})))
-
-(defn -write [^java.io.OutputStream this ^long b]
-  (dosync
-    (let [out (.getOut this)
-          state (.state this)
-          state-buf (:buf @state)
-          state-count (:count @state)
-          state-size (:size @state)
-          result (write-byte out state-buf state-count state-size b)]
-      (ref-set state result))))
-
-(defn -write [^java.io.OutputStream this ^bytes b ^long off ^long len]
-  (dosync 
-    (let [out (.getOut this)
-          state (.state this)
-          state-buf (:buf @state)
-          state-count (:count @state)
-          state-size (:size @state)
-          result (write-array out state-buf state-count state-size b off len)]
-      (ref-set state result))))
-
-(defn -flush [^java.io.OutputStream this]
-  (dosync
-    (let [state (.state this)
-          state-buf (:buf @state)
-          state-count (:count @state)
-          state-size (:size @state)
-          out (.getOut this)]
-      (flush-buffer out state-buf state-count)
-      (ref-set state {:buf state-buf :count 0 :size state-size})
-      (.flush out))))
+(defn -close [^OutputStream this] (dosync (agif/end (:image-writer @(.state this)))))
