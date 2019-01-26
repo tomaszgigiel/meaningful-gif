@@ -3,29 +3,35 @@
   (:import java.awt.Graphics)
   (:import java.awt.Image)
   (:import java.awt.image.BufferedImage)
-  (:import java.io.BufferedOutputStream)
   (:import java.io.ByteArrayInputStream)
   (:import java.io.ByteArrayOutputStream)
   (:import java.io.OutputStream)
-  (:import java.io.PipedInputStream)
-  (:import java.io.PipedOutputStream)
   (:import java.nio.ByteBuffer)
   (:import java.nio.ByteOrder)
-  (:import java.util.zip.ZipEntry)
-  (:import java.util.zip.ZipOutputStream)
   (:import javax.imageio.ImageIO)
-  (:import javax.imageio.stream.ImageOutputStream)
-  (:import javax.imageio.ImageWriteParam)
   (:import javax.imageio.ImageWriter)
   (:import javax.imageio.ImageTypeSpecifier)
-  (:import javax.imageio.metadata.IIOMetadata)
   (:import javax.imageio.metadata.IIOMetadataNode)
   (:import javax.imageio.IIOImage)  
-  (:import org.apache.commons.io.IOUtils)
-  (:require [clojure.java.io :as io])
-  (:require [clojure.string])
-  (:require [clojure.pprint])
   (:gen-class))
+
+(defn image-to-bytes [^BufferedImage buffered-image]
+  (with-open [baos (ByteArrayOutputStream.)]
+    (ImageIO/write buffered-image "gif" baos)
+    (.flush baos)
+    (.toByteArray baos)))
+
+; using (ImageIO/read bais) not working,
+; see: /meaningful-gif/src/test/clojure/pl/tomaszgigiel/agif/agif_bytes_to_image_test.clj
+(defn- byte-array-input-stream [bais]
+  (let [buffered-image-pre (ImageIO/read bais)
+        buffered-image (BufferedImage. (.getWidth buffered-image-pre) (.getHeight buffered-image-pre) (BufferedImage/TYPE_INT_RGB))]
+    (doto (.getGraphics buffered-image) (.drawImage buffered-image-pre 0 0 nil) (.dispose))
+    buffered-image))
+
+(defn bytes-to-image
+  ([^bytes bytes] (with-open [bais (ByteArrayInputStream. bytes)] (byte-array-input-stream bais)))
+  ([^bytes bytes ^long off ^long len] (with-open [bais (ByteArrayInputStream. bytes off len)] (byte-array-input-stream bais))))
 
 (defn- first-node [root & tags]
   (first (remove nil? (map (fn [tag] (let [nodes (.getElementsByTagName root tag)] (if (pos? (.getLength nodes)) (.item nodes 0)))) tags))))
@@ -61,16 +67,20 @@
   (let [gce (or (get-graphic-control-extension node)(create-graphic-control-extension node))]
       (.setAttribute gce "delayTime" (str (/ d 10)))))
 
-(defn- write-image [^BufferedImage im ^ImageWriter wr ^long d ^long n]
-  (let [param (.getDefaultWriteParam wr)
-        type (ImageTypeSpecifier/createFromRenderedImage im)
-        metadata (.getDefaultImageMetadata wr type param)
+(defn write-image [^BufferedImage buffered-image ^ImageWriter image-writer ^long delay-time ^long repeat-count]
+  (let [param (.getDefaultWriteParam image-writer)
+        type (ImageTypeSpecifier/createFromRenderedImage buffered-image)
+        metadata (.getDefaultImageMetadata image-writer type param)
         format (.getNativeMetadataFormatName metadata)
         tree (.getAsTree metadata format)]
-    (set-repeat-count n tree)
-    (set-delay-time d tree)
+    (set-repeat-count repeat-count tree)
+    (set-delay-time delay-time tree)
     (.setFromTree metadata format tree)
-    (.writeToSequence wr (IIOImage. im nil metadata) nil)))
+    (.writeToSequence image-writer (IIOImage. buffered-image nil metadata) nil)))
+
+(defn write-bytes [b off len image-writer delay-time repeat-count]
+  ;;;(write-image (bytes-to-image b off len) image-writer delay-time repeat-count))
+  (write-image (bytes-to-image b) image-writer delay-time repeat-count))
 
 (defn begin [^OutputStream os]
   (let [image-output-stream (ImageIO/createImageOutputStream os)
@@ -79,25 +89,13 @@
     (.prepareWriteSequence image-writer nil)
     image-writer))
 
-(defn write-bytes [b off len image-writer delay-time repeat-count]
-  (let [param (.getDefaultWriteParam image-writer)
-        im (-> (ByteArrayInputStream. b off len) ImageIO/read)
-        type (ImageTypeSpecifier/createFromRenderedImage im)
-        metadata (.getDefaultImageMetadata image-writer type param)
-        format (.getNativeMetadataFormatName metadata)
-        tree (.getAsTree metadata format)]
-    (set-delay-time delay-time tree)
-    (set-repeat-count repeat-count tree)
-    (.setFromTree metadata format tree)
-    (.writeToSequence image-writer (IIOImage. im nil metadata) nil)))
-
 (defn end [^ImageWriter wr]
   (let [image-output-stream (.getOutput wr)]
     (.endWriteSequence wr)
     (.dispose wr)
     (.close image-output-stream)))
 
-(defn create-agif [os fs delay-time repeat-count]
+(defn create-agif-from-images [os fs delay-time repeat-count]
   (with-open [ios (ImageIO/createImageOutputStream os)]
     (let [wr (->> "image/gif" ImageIO/getImageWritersByMIMEType .next)]
       (.setOutput wr ios)
@@ -105,18 +103,3 @@
       (doseq [f fs] (write-image f wr delay-time repeat-count))
       (.endWriteSequence wr)
       (.dispose wr))))
-
-(defn test-images []
-  (let [a (BufferedImage. 100 100 BufferedImage/TYPE_INT_RGB)
-        b (BufferedImage. 100 100 BufferedImage/TYPE_INT_RGB)]
-    (doto (.getGraphics a) (.setColor Color/RED) (.fillRect 10 10 80 80))
-    (doto (.getGraphics b) (.setColor Color/GREEN) (.fillRect 10 10 80 80))
-    [a b]))
-
-(defn image-to-bytes [^BufferedImage buffered-image]
-  (with-open [baos (ByteArrayOutputStream.)]
-    (ImageIO/write buffered-image "gif" baos)
-    (.toByteArray baos)))
-
-(defn test-bytes []
-  (map image-to-bytes (test-images)))

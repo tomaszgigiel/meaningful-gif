@@ -16,7 +16,7 @@
         color (if (> len 90) Color/RED Color/GREEN)]
     (doto (.getGraphics image) (.setColor color) (.fillRect 5 5 90 90))
     (with-open [baos (ByteArrayOutputStream.)]
-      (ImageIO/write image "jpg" baos) ; TODO: "gif" not working (white rectangle, why?)
+      (ImageIO/write image "gif" baos)
       (.flush baos)
       (.toByteArray baos))))
 
