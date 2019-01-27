@@ -34,5 +34,5 @@
     (if exit-message
       (cmd/exit (if ok? 0 1) exit-message)
       (meaningful-gif (first args))))
-  (log/info "ok" )
+  (log/info "ok")
   (shutdown-agents))

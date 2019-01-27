@@ -79,8 +79,7 @@
     (.writeToSequence image-writer (IIOImage. buffered-image nil metadata) nil)))
 
 (defn write-bytes [b off len image-writer delay-time repeat-count]
-  ;;;(write-image (bytes-to-image b off len) image-writer delay-time repeat-count))
-  (write-image (bytes-to-image b) image-writer delay-time repeat-count))
+  (write-image (bytes-to-image b off len) image-writer delay-time repeat-count))
 
 (defn begin [^OutputStream os]
   (let [image-output-stream (ImageIO/createImageOutputStream os)

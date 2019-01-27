@@ -17,7 +17,7 @@
   (throw (UnsupportedOperationException. "Only bytes with a one gif picture")))
 
 (defn -write [^OutputStream this ^bytes b ^long off ^long len]
-  (dosync (agif/write-bytes b off len (:image-writer @(.state this)) 300 10)))
+  (dosync (agif/write-bytes b off len (:image-writer @(.state this)) 300 -1)))
 
 (defn -flush [^OutputStream this] (.flushSuper this))
 
