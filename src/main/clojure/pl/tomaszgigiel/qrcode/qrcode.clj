@@ -6,10 +6,10 @@
   (:require [pl.tomaszgigiel.agif.agif :as agif])
   (:gen-class))
 
-(defn qrcode [^bytes b ^long off ^long len]
+(defn qrcode [b off len width height]
   (let [text (apply str (map char b))
         writer (QRCodeWriter.)
-        bitmatrix (.encode writer text BarcodeFormat/QR_CODE 200 200)
+        bitmatrix (.encode writer text BarcodeFormat/QR_CODE width height)
         image (MatrixToImageWriter/toBufferedImage bitmatrix)]
     (log/info text)
     (agif/image-to-bytes image)))

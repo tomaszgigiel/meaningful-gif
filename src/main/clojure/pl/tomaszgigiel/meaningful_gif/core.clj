@@ -15,18 +15,23 @@
 
 (defn- meaningful-gif [file-name-props]
   (let [props (misc/load-props file-name-props)
-        path-input (-> props :input misc/replace-variable-environment)
-        path-output (-> props :output misc/replace-variable-environment)]
-    (with-open [s (-> path-output
+        input-path (-> props :input-path misc/replace-variable-environment)
+        output-file (-> props :output-file misc/replace-variable-environment)
+        chunk-size (Integer/parseInt (-> props :chunk-size misc/replace-variable-environment))
+        qrcode-delay-time (Integer/parseInt (-> props :qrcode.delay-time misc/replace-variable-environment))
+        qrcode-repeat-count (Integer/parseInt (-> props :qrcode.repeat-count misc/replace-variable-environment))
+        qrcode-width (Integer/parseInt (-> props :qrcode.width misc/replace-variable-environment))
+        qrcode-height (Integer/parseInt (-> props :qrcode.height misc/replace-variable-environment))]
+    (with-open [s (-> output-file
                     FileOutputStream.
                     BufferedOutputStream.
-                    AGifOutputStream.
-                    QRCodeOutputStream.
-                    ChunkOutputStream.
+                    (AGifOutputStream. qrcode-delay-time qrcode-repeat-count)
+                    (QRCodeOutputStream. qrcode-width qrcode-height)
+                    (ChunkOutputStream. chunk-size)
                     FountainCodeOutputStream.
                     Base64OutputStream.
                     ZipOutputStream.)]
-      (.zipFolder s path-input))))
+      (.zipFolder s input-path))))
 
 (defn -main [& args]
   "meaningful-gif: From files to animated GIF and back in Clojure"
