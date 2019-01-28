@@ -11,5 +11,5 @@
         writer (QRCodeWriter.)
         bitmatrix (.encode writer text BarcodeFormat/QR_CODE width height)
         image (MatrixToImageWriter/toBufferedImage bitmatrix)]
-    (log/info text)
+    (log/info "qrcode text = " text)
     (agif/image-to-bytes image)))
