@@ -8,9 +8,11 @@
     :init init
     :constructors {[java.io.OutputStream] [java.io.OutputStream] [java.io.OutputStream long] [java.io.OutputStream]}
     :exposes {out {:get getOut :set setOut}}
+    :methods [^:static [headerSize [] long]]
     :main false))
 
 (def header-size 16)
+(defn -headerSize [] header-size)
 
 (defn- header [chunk-count]
   (let [h (-> chunk-count Long/toHexString (.getBytes StandardCharsets/UTF_8))]

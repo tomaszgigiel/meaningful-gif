@@ -7,31 +7,36 @@
 (tst/use-fixtures :once test-config/once-fixture)
 (tst/use-fixtures :each test-config/each-fixture)
 
-(let [bytes-abc (.getBytes "abc")
-      bytes-abc-chunked-expected (byte-array [(byte \1) ;  0 
-                                              (byte \0) ;  1
-                                              (byte \0) ;  2
-                                              (byte \0) ;  3
-                                              (byte \0) ;  4
-                                              (byte \0) ;  5
-                                              (byte \0) ;  6
-                                              (byte \0) ;  7
-                                              (byte \0) ;  8
-                                              (byte \0) ;  9
-                                              (byte \0) ; 10
-                                              (byte \0) ; 11
-                                              (byte \0) ; 12
-                                              (byte \0) ; 13
-                                              (byte \0) ; 14
-                                              (byte \0) ; 15
-                                              (byte \a) ; 16
-                                              (byte \b) ; 17
-                                              (byte \c)]) ; 18
-      bytes-abc-chunked (with-open [baos (ByteArrayOutputStream.) cos (ChunkOutputStream. baos)]
-                          (.write cos bytes-abc 0 (count bytes-abc))
-                          (.flush cos)
-                          (seq (.toByteArray baos)))]
+(defn- to-chunked-bytes [x]
+  (with-open [baos (ByteArrayOutputStream.)
+              cos (ChunkOutputStream. baos)]
+    (.write cos x 0 (count x))
+    (.flush cos)
+    (seq (.toByteArray baos))))
 
-  (tst/deftest base-test
-    (tst/is (= (seq bytes-abc-chunked-expected) (seq bytes-abc-chunked-expected))))
+(let [abc (.getBytes "abc")
+      abc-chunked-expected (concat (byte-array (ChunkOutputStream/headerSize) [(byte \1)]) abc)
+      abc-chunked (to-chunked-bytes abc) 
+      long (byte-array 1600 (byte \a))
+      long-chunked-expected (concat
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "1")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "2")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "3")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "4")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "5")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "6")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "7")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "8")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "9")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "a")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "b")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "c")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "d")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "e")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "f")) (byte-array 100 (byte \a))
+                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "10")) (byte-array 100 (byte \a)))
+      long-chunked (to-chunked-bytes long)]
+
+  (tst/deftest abc-test (tst/is (= (seq abc-chunked) (seq abc-chunked-expected))))
+  (tst/deftest long-test (tst/is (= (seq long-chunked) (seq long-chunked-expected))))
 )
