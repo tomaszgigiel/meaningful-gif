@@ -15,7 +15,9 @@
                  [commons-codec/commons-codec "1.11"]
                  [commons-io/commons-io "2.6"]
                  [com.google.zxing/core "3.3.3"]
-                 [com.google.zxing/javase "3.3.3"]]
+                 [com.google.zxing/javase "3.3.3"]
+                 [org.jcodec/jcodec "0.2.3"]
+                 [org.jcodec/jcodec-javase "0.2.3"]]
 
   :source-paths ["src/main/clojure"]
   :test-paths ["src/test/clojure"]
@@ -23,6 +25,8 @@
   :target-path "target/%s"
   :jar-name "meaningful-gif.jar"
   :uberjar-name "meaningful-gif-uberjar.jar"
-  :main pl.tomaszgigiel.meaningful-gif.core
-  :aot [#"pl.tomaszgigiel.streams.*" #".*"] 
+  :main nil
+  :aot [#"pl.tomaszgigiel.streams.*" #".*"]
+  :profiles {:main-create {:main pl.tomaszgigiel.meaningful-gif.create.core}
+             :main-extract {:main pl.tomaszgigiel.meaningful-gif.extract.core}}
 )
