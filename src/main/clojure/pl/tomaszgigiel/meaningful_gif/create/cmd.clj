@@ -10,7 +10,7 @@
 (defn usage [options-summary]
   (->> ["meaningful-gif: Files to animated GIF and back in Clojure."
         ""
-        "Usage: java -jar /path/to/meaningful-gif-uberjar.jar /path/to/meaningful-gif.properties"
+        "Usage: java -cp /path/to/meaningful-gif-uberjar.jar pl.tomaszgigiel.meaningful_gif.create.core /another/path/to/meaningful-gif.create.properties"
         ""
         "Options:"
         options-summary
