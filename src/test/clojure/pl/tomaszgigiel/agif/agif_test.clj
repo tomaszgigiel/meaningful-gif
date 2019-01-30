@@ -4,7 +4,7 @@
   (:import java.io.ByteArrayOutputStream)
   (:require [clojure.test :as tst])
   (:require [pl.tomaszgigiel.agif.agif :as agif])
-  (:require [pl.tomaszgigiel.streams.test-config :as test-config]))
+  (:require [pl.tomaszgigiel.agif.test-config :as test-config]))
 
 (tst/use-fixtures :once test-config/once-fixture)
 (tst/use-fixtures :each test-config/each-fixture)
