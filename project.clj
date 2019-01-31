@@ -29,5 +29,6 @@
   :aot [#"pl.tomaszgigiel.streams.*" #".*"]
   :profiles {:main-create {:main pl.tomaszgigiel.meaningful-gif.create.core}
              :main-extract {:main pl.tomaszgigiel.meaningful-gif.extract.core}
-             :test {:resource-paths ["src/test/resources"]}}
+             :test {:resource-paths ["src/test/resources"]}
+             :dev {:resource-paths ["src/test/resources"]}}
 )

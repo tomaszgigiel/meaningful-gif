@@ -1,4 +1,6 @@
 (ns pl.tomaszgigiel.utils.misc
+  (:import java.net.URI)
+  (:import java.io.File)
   (:import java.io.PipedInputStream)
   (:import java.io.PipedOutputStream)
   (:require [clojure.java.io :as io])
@@ -61,3 +63,14 @@
         (func output)
         (finally (.close output))))
     input))
+
+;; https://stackoverflow.com/questions/15715546/clojure-how-to-ignore-exceptions-that-may-be-thrown-from-an-expression
+(defmacro swallow-exceptions [& body]
+  `(try ~@body (catch Exception e#)))
+
+(defn file-from-resources [dir & nexts]
+  (let [directory (io/resource dir)
+        separator (System/getProperty "file.separator")
+        parts (conj nexts directory)
+        path (string/join separator parts)]
+    (-> path URI. File.)))

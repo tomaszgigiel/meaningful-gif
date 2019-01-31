@@ -4,6 +4,7 @@
   (:import com.google.zxing.client.j2se.BufferedImageLuminanceSource)
   (:import com.google.zxing.client.j2se.MatrixToImageWriter)
   (:import com.google.zxing.common.HybridBinarizer)
+  (:import com.google.zxing.DecodeHintType)
   (:import com.google.zxing.MultiFormatReader)
   (:import com.google.zxing.qrcode.QRCodeWriter)
   (:require [clojure.tools.logging :as log])
@@ -21,6 +22,7 @@
         binarizer (HybridBinarizer. source)
         bitmap (BinaryBitmap. binarizer)
         reader (MultiFormatReader.)
-        result (.decode reader bitmap)
+        hints {DecodeHintType/TRY_HARDER true}
+        result (.decode reader bitmap hints)
         text (.getText result)]
     text))
