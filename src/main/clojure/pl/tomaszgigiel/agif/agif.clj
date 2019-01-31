@@ -15,6 +15,11 @@
   (:import javax.imageio.IIOImage)  
   (:gen-class))
 
+(defn black-white [buffered-image]
+  (let [bw (BufferedImage. (.getWidth buffered-image) (.getHeight buffered-image) (BufferedImage/TYPE_BYTE_BINARY))]
+    (doto (.getGraphics bw) (.drawImage buffered-image 0 0 nil) (.dispose))
+    bw))
+
 (defn image-to-bytes [^BufferedImage buffered-image]
   (with-open [baos (ByteArrayOutputStream.)]
     (ImageIO/write buffered-image "gif" baos)
