@@ -1,8 +1,8 @@
 (ns pl.tomaszgigiel.utils.misc
-  (:import java.net.URI)
   (:import java.io.File)
   (:import java.io.PipedInputStream)
   (:import java.io.PipedOutputStream)
+  (:import java.net.URI)
   (:require [clojure.java.io :as io])
   (:require [clojure.pprint :as pp])
   (:require [clojure.string :as string])

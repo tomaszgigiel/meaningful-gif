@@ -9,16 +9,19 @@
 (tst/use-fixtures :once test-config/once-fixture)
 (tst/use-fixtures :each test-config/each-fixture)
 
-(defn- to-qrcode-bytes [x]
+(defn- to-qrcode-bytes [x f]
   (with-open [baos (ByteArrayOutputStream.)
               qrcos (QRCodeOutputStream. baos 200 200)]
-    (.write qrcos x 0 (count x))
+    (f qrcos x)
     (.flush qrcos)
     (seq (.toByteArray baos))))
 
 (let [abc "abc"
       abc-qrcode-expected (agif/image-to-bytes (qrcode/qrcode abc 200 200))
-      abc-qrcode-actual (to-qrcode-bytes (.getBytes abc))]
+      abc-qrcode-actual-long (to-qrcode-bytes (.getBytes abc) (fn [o x] (.write o x 0 (count x))))
+      abc-qrcode-actual-short (to-qrcode-bytes (.getBytes abc) (fn [o x] (.write o x)))]
 
-  (tst/deftest abc-test (tst/is (= (seq abc-qrcode-actual) (seq abc-qrcode-expected))))
-)
+  (tst/deftest abc-test (tst/is (= (seq abc-qrcode-expected) (seq abc-qrcode-actual-long))))
+  (tst/deftest abc-test (tst/is (= (seq abc-qrcode-expected) (seq abc-qrcode-actual-short)))))
+
+(tst/deftest write-int-test (tst/is (thrown? UnsupportedOperationException (to-qrcode-bytes 1 (fn [o x] (.write o x))))))

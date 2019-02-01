@@ -13,7 +13,6 @@
     :init init
     :constructors {[java.io.OutputStream] [java.io.OutputStream] [java.io.OutputStream long long] [java.io.OutputStream]}
     :exposes {out {:get getOut :set setOut}}
-    :exposes-methods {flush flushSuper write writeSuper}
     :main false))
 
 (defn -init
@@ -23,19 +22,26 @@
 (defn -write-int [^OutputStream this ^long b]
   (throw (UnsupportedOperationException. "Only bytes for a one QR Code")))
 
-(defn -write [^OutputStream this ^bytes b ^long off ^long len]
-  (dosync
-    (let [out (.getOut this)
-          state (.state this)
-          width (:width @state)
-          height (:height @state)
-          sub (take len (drop off b))
-          text (apply str (map char sub))
-          image (qrcode/qrcode text width height)
-          image-bytes (agif/image-to-bytes image)]
-      (.write out image-bytes))))
-
+;; TODO: why not used, but I have to define multi-arity "-write"?
+;; -> Caused by: clojure.lang.ArityException: Wrong number of args (2) passed to: QRCodeOutputStream/-write
+;; "-write-int" works fine.
 (defn -write-bytes [^OutputStream this ^bytes b]
-  (-write this b 0 (count b)))
+  (throw (UnsupportedOperationException. "???")))
+
+(defn -write
+  ([^OutputStream this ^bytes b]
+    (-write this b 0 (count b)))
+  ([^OutputStream this ^bytes b ^long off ^long len]
+    (dosync
+      (let [out (.getOut this)
+            state (.state this)
+            width (:width @state)
+            height (:height @state)
+            sub (take len (drop off b))
+            text (apply str (map char sub))
+            image (qrcode/qrcode text width height)
+            image-bytes (agif/image-to-bytes image)
+            image-bytes-count (count image-bytes)]
+        (.write out image-bytes 0 image-bytes-count)))))
 
 (defn -flush [^OutputStream this] (.flush (.getOut this)))

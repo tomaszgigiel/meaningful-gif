@@ -11,4 +11,8 @@
   (map #(-> % ImageIO/read qrcode/text misc/swallow-exceptions) (-> (misc/file-from-resources "series") .listFiles))
   (map #(-> % ImageIO/read agif/black-white qrcode/text misc/swallow-exceptions) (-> (misc/file-from-resources "single-low") .listFiles))
   (map #(-> % ImageIO/read agif/black-white qrcode/text misc/swallow-exceptions) (-> (misc/file-from-resources "series") .listFiles))
+
+  (let [bi (ImageIO/read (misc/file-from-resources "single-low" "quality-low-05.jpg"))
+        f (-> (misc/file-from-resources "single-low" "quality-low-05-bw.jpg"))]
+    (ImageIO/write (agif/black-white bi) "jpg" f))
 )
