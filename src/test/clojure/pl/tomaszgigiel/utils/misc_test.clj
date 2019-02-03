@@ -8,6 +8,9 @@
 (tst/use-fixtures :once test-config/once-fixture)
 (tst/use-fixtures :each test-config/each-fixture)
 
+(tst/deftest replace-variable-environment-test
+  (tst/is (= "ok" (misc/replace-variable-environment "ok"))))
+
 (tst/deftest pprint-is-test
   (tst/is (= (with-open [is (IOUtils/toInputStream "abc")] (with-out-str (misc/pprint-is is))) "[97 98 99]\n")))
 

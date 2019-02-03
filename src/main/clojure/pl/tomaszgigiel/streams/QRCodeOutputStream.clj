@@ -36,11 +36,11 @@
         (.write out image-bytes 0 image-bytes-count)))))
 
 (defmulti -write
-  (fn [& args] 
+  (fn [& args]
     (apply vector (map class args))))
 
-(defmethod -write [OutputStream Integer] [this b] (throw (UnsupportedOperationException. "Only bytes for a one QR Code"))) 
-(defmethod -write [OutputStream  (class (byte-array 0))] [this b] (write-qrcode this b)) 
-(defmethod -write [OutputStream  (class (byte-array 0)) Integer Integer] [this b off len] (write-qrcode this b off len)) 
+(defmethod -write [OutputStream Integer] [this b] (throw (UnsupportedOperationException. "Only bytes for a one QR Code")))
+(defmethod -write [OutputStream  (class (byte-array 0))] [this b] (write-qrcode this b))
+(defmethod -write [OutputStream  (class (byte-array 0)) Integer Integer] [this b off len] (write-qrcode this b off len))
 
 (defn -flush [^OutputStream this] (.flush (.getOut this)))

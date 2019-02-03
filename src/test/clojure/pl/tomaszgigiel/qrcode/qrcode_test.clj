@@ -14,6 +14,4 @@
 (tst/use-fixtures :each test-config/each-fixture)
 
 (let [text "abc"]
-  (tst/deftest simple-test (tst/is (= text (qrcode/text (qrcode/qrcode text 100 100)))))
-  (tst/deftest file-test (tst/is (= text (-> (misc/file-from-resources "single" "quality-good.png") ImageIO/read qrcode/text))))
-)
+  (tst/deftest simple-test (tst/is (= text (qrcode/text (qrcode/qrcode text 100 100))))))

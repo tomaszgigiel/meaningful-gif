@@ -15,6 +15,16 @@
   (:import javax.imageio.IIOImage)  
   (:gen-class))
 
+(defn images-from-agif [file]
+  (let [reader (-> "gif" ImageIO/getImageReadersByFormatName .next)
+        stream (ImageIO/createImageInputStream file)]
+    (.setInput reader stream)
+    (for [i (range 0 (.getNumImages reader true))]
+      (.read reader i))))
+
+(defn images-from-directory [directory]
+  (map #(ImageIO/read %) (.listFiles directory)))
+
 (defn black-white [buffered-image]
   (let [bw (BufferedImage. (.getWidth buffered-image) (.getHeight buffered-image) (BufferedImage/TYPE_BYTE_BINARY))]
     (doto (.getGraphics bw) (.drawImage buffered-image 0 0 nil) (.dispose))

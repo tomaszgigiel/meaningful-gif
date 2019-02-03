@@ -8,13 +8,12 @@
   (:require [clojure.string :as string])
   (:gen-class))
 
-;; https://stackoverflow.com/questions/7777882/loading-configuration-file-in-clojure-as-data-structure
 (defn load-props
   [file-name]
   (with-open [^java.io.Reader reader (io/reader file-name)] 
     (let [props (java.util.Properties.)]
       (.load props reader)
-      (into {} (for [[k v] props] [(keyword k) (read-string v)])))))
+      (into {} (for [[k v] props] [(keyword k) v])))))
 
 (defn replace-variable-environment
   [s]
