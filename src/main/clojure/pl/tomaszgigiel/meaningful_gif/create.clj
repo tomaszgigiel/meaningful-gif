@@ -1,4 +1,5 @@
 (ns pl.tomaszgigiel.meaningful-gif.create
+  (:import java.io.BufferedOutputStream)
   (:import java.io.FileOutputStream)
   (:import pl.tomaszgigiel.streams.AGifOutputStream)
   (:import pl.tomaszgigiel.streams.Base64OutputStream)
@@ -28,5 +29,12 @@
                     (ChunkOutputStream. chunk-size)
                     FountainCodeOutputStream.
                     Base64OutputStream.
+                    ZipOutputStream.)]
+    (.zipFolder s input-path)))
+
+(defn create-zip [input-path output-file]
+  (with-open [s (-> output-file
+                    FileOutputStream.
+                    BufferedOutputStream.
                     ZipOutputStream.)]
     (.zipFolder s input-path)))

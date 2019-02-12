@@ -1,27 +1,40 @@
 (ns pl.tomaszgigiel.meaningful-gif.extract
   (:import java.io.File)
-  (:import org.jcodec.api.FrameGrab)
-  (:import org.jcodec.common.io.NIOUtils)
-  (:import org.jcodec.scale.AWTUtil)
+  (:import java.util.Base64)
+  (:require [clojure.java.io :as io])
   (:require [pl.tomaszgigiel.agif.agif :as agif])
+  (:require [pl.tomaszgigiel.chunk.chunk :as chunk])
+  (:require [pl.tomaszgigiel.mov.mov :as mov])
   (:require [pl.tomaszgigiel.qrcode.qrcode :as qrcode])
   (:require [pl.tomaszgigiel.utils.misc :as misc])
   (:gen-class))
 
-(defn- do-something [buffered-image]
-  (-> buffered-image agif/black-white qrcode/text println misc/swallow-exceptions))
+(defn- image-to-data [image] (-> image agif/black-white qrcode/text misc/swallow-exceptions))
 
-(defn extract-mov [input-file output-file]
-  (let [grab (-> input-file File. NIOUtils/readableChannel FrameGrab/createFrameGrab)]
-    (loop [frame (.getNativeFrame grab)]
-      (when (some? frame)
-        (-> frame AWTUtil/toBufferedImage do-something)
-        (recur (.getNativeFrame grab))))))
+(defn- images-to-zip [images]
+  (->> images (map image-to-data)
+    distinct
+    (map chunk/wrap)
+    (sort chunk/cmp)
+    (map chunk/cargo)
+    flatten
+    (map char)
+    (apply str)
+    (#(clojure.string/replace % #"\r\n" ""))
+    (.decode (Base64/getDecoder))))
 
-(defn extract-agif [input-file output-file]
-  (doseq [buffered-image (-> input-file File. agif/images-from-agif)]
-    (do-something buffered-image)))
+(defn- save [input output-file]
+  (with-open [out (io/output-stream output-file)]
+    (.write out input)))
 
-(defn extract-series [input-path output-file]
-  (doseq [buffered-image (-> input-path File. agif/images-from-directory)]
-    (do-something buffered-image)))
+(defn extract-agif
+  ([file] (-> file agif/images-from-agif images-to-zip))
+  ([input-file output-file] (save (-> input-file File. extract-agif) output-file)))
+
+(defn extract-series
+  ([directory] (-> directory agif/images-from-directory images-to-zip))
+  ([input-directory output-file] (save (-> input-directory File. extract-series) output-file)))
+
+(defn extract-mov
+  ([file] (-> file mov/images-from-mov images-to-zip))
+  ([input-file output-file] (save (-> input-file File. extract-mov) output-file)))

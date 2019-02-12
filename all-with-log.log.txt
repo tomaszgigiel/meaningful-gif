@@ -1,0 +1,445 @@
+Skrypt uruchomiony wto, 12 lut 2019, 04:23:54
+/home/tomasz/workspace-clojure/meaningful-gif
+Compiling pl.tomaszgigiel.streams.ChunkOutputStream
+Compiling pl.tomaszgigiel.streams.FountainCodeOutputStream
+Compiling pl.tomaszgigiel.streams.QRCodeOutputStream
+Compiling pl.tomaszgigiel.streams.PipedInputStream
+Compiling pl.tomaszgigiel.streams.Base64OutputStream
+Compiling pl.tomaszgigiel.streams.AGifOutputStream
+Compiling pl.tomaszgigiel.streams.ZipOutputStream
+Compiling pl.tomaszgigiel.streams.SeriesFileOutputStream
+Compiling pl.tomaszgigiel.agif.agif
+Compiling pl.tomaszgigiel.qrcode.qrcode
+Compiling pl.tomaszgigiel.mov.mov
+Compiling pl.tomaszgigiel.utils.misc
+Compiling pl.tomaszgigiel.utils.resources
+Compiling pl.tomaszgigiel.chunk.chunk
+Compiling pl.tomaszgigiel.streams.ChunkOutputStream
+Compiling pl.tomaszgigiel.streams.FountainCodeOutputStream
+Compiling pl.tomaszgigiel.streams.QRCodeOutputStream
+Compiling pl.tomaszgigiel.streams.PipedInputStream
+Compiling pl.tomaszgigiel.streams.Base64OutputStream
+Compiling pl.tomaszgigiel.streams.AGifOutputStream
+Compiling pl.tomaszgigiel.streams.ZipOutputStream
+Compiling pl.tomaszgigiel.streams.SeriesFileOutputStream
+Compiling pl.tomaszgigiel.meaningful-gif.extract
+Compiling pl.tomaszgigiel.meaningful-gif.core
+Compiling pl.tomaszgigiel.meaningful-gif.create
+Compiling pl.tomaszgigiel.meaningful-gif.cmd
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+Compiling pl.tomaszgigiel.streams.ChunkOutputStream
+Compiling pl.tomaszgigiel.streams.FountainCodeOutputStream
+Compiling pl.tomaszgigiel.streams.QRCodeOutputStream
+Compiling pl.tomaszgigiel.streams.PipedInputStream
+Compiling pl.tomaszgigiel.streams.Base64OutputStream
+Compiling pl.tomaszgigiel.streams.AGifOutputStream
+Compiling pl.tomaszgigiel.streams.ZipOutputStream
+Compiling pl.tomaszgigiel.streams.SeriesFileOutputStream
+Compiling pl.tomaszgigiel.agif.agif
+Compiling pl.tomaszgigiel.qrcode.qrcode
+Compiling pl.tomaszgigiel.mov.mov
+Compiling pl.tomaszgigiel.utils.misc
+Compiling pl.tomaszgigiel.utils.resources
+Compiling pl.tomaszgigiel.chunk.chunk
+Compiling pl.tomaszgigiel.streams.ChunkOutputStream
+Compiling pl.tomaszgigiel.streams.FountainCodeOutputStream
+Compiling pl.tomaszgigiel.streams.QRCodeOutputStream
+Compiling pl.tomaszgigiel.streams.PipedInputStream
+Compiling pl.tomaszgigiel.streams.Base64OutputStream
+Compiling pl.tomaszgigiel.streams.AGifOutputStream
+Compiling pl.tomaszgigiel.streams.ZipOutputStream
+Compiling pl.tomaszgigiel.streams.SeriesFileOutputStream
+Compiling pl.tomaszgigiel.meaningful-gif.extract
+Compiling pl.tomaszgigiel.meaningful-gif.core
+Compiling pl.tomaszgigiel.meaningful-gif.create
+Compiling pl.tomaszgigiel.meaningful-gif.cmd
+
+lein test pl.tomaszgigiel.agif.agif-bytes-to-image-test
+
+lein test pl.tomaszgigiel.agif.agif-test
+
+lein test pl.tomaszgigiel.agif.test-config
+
+lein test pl.tomaszgigiel.chunk.chunk-test
+
+lein test pl.tomaszgigiel.chunk.test-config
+
+lein test pl.tomaszgigiel.meaningful-gif.extract-test
+
+lein test pl.tomaszgigiel.meaningful-gif.test-config
+
+lein test pl.tomaszgigiel.qrcode.qrcode-test
+
+lein test pl.tomaszgigiel.qrcode.test-config
+
+lein test pl.tomaszgigiel.streams.ChunkOutputStream-test
+
+lein test pl.tomaszgigiel.streams.QRCodeOutputStream-test
+
+lein test pl.tomaszgigiel.streams.ZipOutputStream-test
+
+lein test pl.tomaszgigiel.streams.test-config
+
+lein test pl.tomaszgigiel.utils.misc-test
+
+lein test pl.tomaszgigiel.utils.resources-test
+
+lein test pl.tomaszgigiel.utils.test-config
+
+Ran 31 tests containing 62 assertions.
+0 failures, 0 errors.
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+Compiling pl.tomaszgigiel.streams.ChunkOutputStream
+Compiling pl.tomaszgigiel.streams.FountainCodeOutputStream
+Compiling pl.tomaszgigiel.streams.QRCodeOutputStream
+Compiling pl.tomaszgigiel.streams.PipedInputStream
+Compiling pl.tomaszgigiel.streams.Base64OutputStream
+Compiling pl.tomaszgigiel.streams.AGifOutputStream
+Compiling pl.tomaszgigiel.streams.ZipOutputStream
+Compiling pl.tomaszgigiel.streams.SeriesFileOutputStream
+Compiling pl.tomaszgigiel.agif.agif
+Compiling pl.tomaszgigiel.qrcode.qrcode
+Compiling pl.tomaszgigiel.mov.mov
+Compiling pl.tomaszgigiel.utils.misc
+Compiling pl.tomaszgigiel.utils.resources
+Compiling pl.tomaszgigiel.chunk.chunk
+Compiling pl.tomaszgigiel.streams.ChunkOutputStream
+Compiling pl.tomaszgigiel.streams.FountainCodeOutputStream
+Compiling pl.tomaszgigiel.streams.QRCodeOutputStream
+Compiling pl.tomaszgigiel.streams.PipedInputStream
+Compiling pl.tomaszgigiel.streams.Base64OutputStream
+Compiling pl.tomaszgigiel.streams.AGifOutputStream
+Compiling pl.tomaszgigiel.streams.ZipOutputStream
+Compiling pl.tomaszgigiel.streams.SeriesFileOutputStream
+Compiling pl.tomaszgigiel.meaningful-gif.extract
+Compiling pl.tomaszgigiel.meaningful-gif.core
+Compiling pl.tomaszgigiel.meaningful-gif.create
+Compiling pl.tomaszgigiel.meaningful-gif.cmd
+Compiling pl.tomaszgigiel.meaningful-gif.core
+Created /home/tomasz/workspace-clojure/meaningful-gif/target/uberjar/meaningful-gif.jar
+Created /home/tomasz/workspace-clojure/meaningful-gif/target/uberjar/meaningful-gif-uberjar.jar
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+rm: nie można usunąć './src/test/resources/encoded-mov/*': Nie ma takiego pliku ani katalogu
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:25:31,990][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:25:35,945][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:25:39,751][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:25:43,835][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:25:48,050][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:25:52,710][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:25:56,053][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+Compiling pl.tomaszgigiel.streams.ChunkOutputStream
+Compiling pl.tomaszgigiel.streams.FountainCodeOutputStream
+Compiling pl.tomaszgigiel.streams.QRCodeOutputStream
+Compiling pl.tomaszgigiel.streams.PipedInputStream
+Compiling pl.tomaszgigiel.streams.Base64OutputStream
+Compiling pl.tomaszgigiel.streams.AGifOutputStream
+Compiling pl.tomaszgigiel.streams.ZipOutputStream
+Compiling pl.tomaszgigiel.streams.SeriesFileOutputStream
+Compiling pl.tomaszgigiel.agif.agif
+Compiling pl.tomaszgigiel.qrcode.qrcode
+Compiling pl.tomaszgigiel.mov.mov
+Compiling pl.tomaszgigiel.utils.misc
+Compiling pl.tomaszgigiel.utils.resources
+Compiling pl.tomaszgigiel.chunk.chunk
+Compiling pl.tomaszgigiel.streams.ChunkOutputStream
+Compiling pl.tomaszgigiel.streams.FountainCodeOutputStream
+Compiling pl.tomaszgigiel.streams.QRCodeOutputStream
+Compiling pl.tomaszgigiel.streams.PipedInputStream
+Compiling pl.tomaszgigiel.streams.Base64OutputStream
+Compiling pl.tomaszgigiel.streams.AGifOutputStream
+Compiling pl.tomaszgigiel.streams.ZipOutputStream
+Compiling pl.tomaszgigiel.streams.SeriesFileOutputStream
+Compiling pl.tomaszgigiel.meaningful-gif.extract
+Compiling pl.tomaszgigiel.meaningful-gif.core
+Compiling pl.tomaszgigiel.meaningful-gif.create
+Compiling pl.tomaszgigiel.meaningful-gif.cmd
+
+lein test pl.tomaszgigiel.agif.agif-bytes-to-image-test
+
+lein test pl.tomaszgigiel.agif.agif-test
+
+lein test pl.tomaszgigiel.agif.test-config
+
+lein test pl.tomaszgigiel.chunk.chunk-test
+
+lein test pl.tomaszgigiel.chunk.test-config
+
+lein test pl.tomaszgigiel.meaningful-gif.extract-test
+
+lein test pl.tomaszgigiel.meaningful-gif.test-config
+
+lein test pl.tomaszgigiel.qrcode.qrcode-test
+
+lein test pl.tomaszgigiel.qrcode.test-config
+
+lein test pl.tomaszgigiel.streams.ChunkOutputStream-test
+
+lein test pl.tomaszgigiel.streams.QRCodeOutputStream-test
+
+lein test pl.tomaszgigiel.streams.ZipOutputStream-test
+
+lein test pl.tomaszgigiel.streams.test-config
+
+lein test pl.tomaszgigiel.utils.misc-test
+
+lein test pl.tomaszgigiel.utils.resources-test
+
+lein test pl.tomaszgigiel.utils.test-config
+
+Ran 31 tests containing 62 assertions.
+0 failures, 0 errors.
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:27:08,405][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:27:12,022][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:27:15,557][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:27:19,456][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:27:23,067][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:27:26,724][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:27:32,469][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:27:36,537][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:27:40,301][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:27:44,502][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:27:48,136][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:27:51,639][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:27:54,852][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+
+lein test pl.tomaszgigiel.agif.agif-bytes-to-image-test
+
+lein test pl.tomaszgigiel.agif.agif-test
+
+lein test pl.tomaszgigiel.agif.test-config
+
+lein test pl.tomaszgigiel.chunk.chunk-test
+
+lein test pl.tomaszgigiel.chunk.test-config
+
+lein test pl.tomaszgigiel.meaningful-gif.extract-test
+
+lein test pl.tomaszgigiel.meaningful-gif.test-config
+
+lein test pl.tomaszgigiel.qrcode.qrcode-test
+
+lein test pl.tomaszgigiel.qrcode.test-config
+
+lein test pl.tomaszgigiel.streams.ChunkOutputStream-test
+
+lein test pl.tomaszgigiel.streams.QRCodeOutputStream-test
+
+lein test pl.tomaszgigiel.streams.ZipOutputStream-test
+
+lein test pl.tomaszgigiel.streams.test-config
+
+lein test pl.tomaszgigiel.utils.misc-test
+
+lein test pl.tomaszgigiel.utils.resources-test
+
+lein test pl.tomaszgigiel.utils.test-config
+
+Ran 31 tests containing 62 assertions.
+0 failures, 0 errors.
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:28:58,444][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:29:02,049][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:29:05,508][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:29:09,453][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:29:13,018][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:29:16,423][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+Compiling pl.tomaszgigiel.streams.ChunkOutputStream
+Compiling pl.tomaszgigiel.streams.FountainCodeOutputStream
+Compiling pl.tomaszgigiel.streams.QRCodeOutputStream
+Compiling pl.tomaszgigiel.streams.PipedInputStream
+Compiling pl.tomaszgigiel.streams.Base64OutputStream
+Compiling pl.tomaszgigiel.streams.AGifOutputStream
+Compiling pl.tomaszgigiel.streams.ZipOutputStream
+Compiling pl.tomaszgigiel.streams.SeriesFileOutputStream
+Compiling pl.tomaszgigiel.agif.agif
+Compiling pl.tomaszgigiel.qrcode.qrcode
+Compiling pl.tomaszgigiel.mov.mov
+Compiling pl.tomaszgigiel.utils.misc
+Compiling pl.tomaszgigiel.utils.resources
+Compiling pl.tomaszgigiel.chunk.chunk
+Compiling pl.tomaszgigiel.streams.ChunkOutputStream
+Compiling pl.tomaszgigiel.streams.FountainCodeOutputStream
+Compiling pl.tomaszgigiel.streams.QRCodeOutputStream
+Compiling pl.tomaszgigiel.streams.PipedInputStream
+Compiling pl.tomaszgigiel.streams.Base64OutputStream
+Compiling pl.tomaszgigiel.streams.AGifOutputStream
+Compiling pl.tomaszgigiel.streams.ZipOutputStream
+Compiling pl.tomaszgigiel.streams.SeriesFileOutputStream
+Compiling pl.tomaszgigiel.meaningful-gif.extract
+Compiling pl.tomaszgigiel.meaningful-gif.core
+Compiling pl.tomaszgigiel.meaningful-gif.create
+Compiling pl.tomaszgigiel.meaningful-gif.cmd
+[2019-02-12 04:29:31,003][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:29:38,602][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:29:45,500][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:29:53,129][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:30:00,295][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:30:07,289][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:30:14,033][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+
+lein test pl.tomaszgigiel.agif.agif-bytes-to-image-test
+
+lein test pl.tomaszgigiel.agif.agif-test
+
+lein test pl.tomaszgigiel.agif.test-config
+
+lein test pl.tomaszgigiel.chunk.chunk-test
+
+lein test pl.tomaszgigiel.chunk.test-config
+
+lein test pl.tomaszgigiel.meaningful-gif.extract-test
+
+lein test pl.tomaszgigiel.meaningful-gif.test-config
+
+lein test pl.tomaszgigiel.qrcode.qrcode-test
+
+lein test pl.tomaszgigiel.qrcode.test-config
+
+lein test pl.tomaszgigiel.streams.ChunkOutputStream-test
+
+lein test pl.tomaszgigiel.streams.QRCodeOutputStream-test
+
+lein test pl.tomaszgigiel.streams.ZipOutputStream-test
+
+lein test pl.tomaszgigiel.streams.test-config
+
+lein test pl.tomaszgigiel.utils.misc-test
+
+lein test pl.tomaszgigiel.utils.resources-test
+
+lein test pl.tomaszgigiel.utils.test-config
+
+Ran 31 tests containing 62 assertions.
+0 failures, 0 errors.
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:31:21,176][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:31:28,306][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:31:35,384][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:31:43,092][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:31:50,153][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:31:57,099][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:32:06,978][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:32:14,509][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:32:21,564][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:32:29,237][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:32:36,512][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:32:43,569][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:32:50,216][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+
+lein test pl.tomaszgigiel.agif.agif-bytes-to-image-test
+
+lein test pl.tomaszgigiel.agif.agif-test
+
+lein test pl.tomaszgigiel.agif.test-config
+
+lein test pl.tomaszgigiel.chunk.chunk-test
+
+lein test pl.tomaszgigiel.chunk.test-config
+
+lein test pl.tomaszgigiel.meaningful-gif.extract-test
+
+lein test pl.tomaszgigiel.meaningful-gif.test-config
+
+lein test pl.tomaszgigiel.qrcode.qrcode-test
+
+lein test pl.tomaszgigiel.qrcode.test-config
+
+lein test pl.tomaszgigiel.streams.ChunkOutputStream-test
+
+lein test pl.tomaszgigiel.streams.QRCodeOutputStream-test
+
+lein test pl.tomaszgigiel.streams.ZipOutputStream-test
+
+lein test pl.tomaszgigiel.streams.test-config
+
+lein test pl.tomaszgigiel.utils.misc-test
+
+lein test pl.tomaszgigiel.utils.resources-test
+
+lein test pl.tomaszgigiel.utils.test-config
+
+Ran 31 tests containing 62 assertions.
+0 failures, 0 errors.
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:33:57,441][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:34:04,544][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:34:11,591][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:34:18,885][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:34:25,845][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+[2019-02-12 04:34:32,759][INFO][pl.tomaszgigiel.meaningful-gif.core] ok
+/home/tomasz/workspace-clojure/meaningful-gif
+/home/tomasz/workspace-clojure/meaningful-gif
+
+Skrypt wykonany wto, 12 lut 2019, 04:34:33

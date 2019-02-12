@@ -7,36 +7,22 @@
 (tst/use-fixtures :once test-config/once-fixture)
 (tst/use-fixtures :each test-config/each-fixture)
 
-(defn- to-chunked-bytes [x]
+(defn- bytes-chunked [x chunk-size]
   (with-open [baos (ByteArrayOutputStream.)
-              cos (ChunkOutputStream. baos)]
+              cos (ChunkOutputStream. baos chunk-size)]
     (.write cos x 0 (count x))
     (.flush cos)
     (seq (.toByteArray baos))))
 
-(let [abc (.getBytes "abc")
-      abc-chunked-expected (concat (byte-array (ChunkOutputStream/headerSize) [(byte \1)]) abc)
-      abc-chunked (to-chunked-bytes abc) 
-      long (byte-array 1600 (byte \a))
-      long-chunked-expected (concat
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "1")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "2")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "3")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "4")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "5")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "6")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "7")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "8")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "9")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "a")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "b")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "c")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "d")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "e")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "f")) (byte-array 100 (byte \a))
-                              (byte-array (ChunkOutputStream/headerSize) (.getBytes "10")) (byte-array 100 (byte \a)))
-      long-chunked (to-chunked-bytes long)]
+(let [chunk-size 20
+      cargo-size (* chunk-size 1024 1024)
+      cargo (byte-array cargo-size (byte \a))
+      cargo-actual (bytes-chunked cargo chunk-size)
+      abc (.getBytes "abc")
+      abc-actual (bytes-chunked abc chunk-size)
+      abc-expected (map byte "1zabc")]
 
-  (tst/deftest abc-test (tst/is (= (seq abc-chunked) (seq abc-chunked-expected))))
-  (tst/deftest long-test (tst/is (= (seq long-chunked) (seq long-chunked-expected))))
-)
+  (tst/deftest abc-test (tst/is (= abc-actual abc-expected)))
+  (tst/deftest cargo-test
+    (tst/is (> (count cargo-actual) cargo-size))
+    (tst/is (= (->> cargo-actual (take 3) (map char) (apply str)) "1za"))))

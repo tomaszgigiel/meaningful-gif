@@ -67,9 +67,12 @@
 (defmacro swallow-exceptions [& body]
   `(try ~@body (catch Exception e#)))
 
-(defn file-from-resources [dir & nexts]
-  (let [directory (io/resource dir)
-        separator (System/getProperty "file.separator")
-        parts (conj nexts directory)
-        path (string/join separator parts)]
-    (-> path URI. File.)))
+(defn from-common-directory [root path]
+  (let [r (string/split root #"[/\\]")
+        p (string/split path #"[/\\]")
+        c (subvec p (dec (count r)))
+        o (string/join (System/getProperty "file.separator") c)]
+    o))
+
+(defn equals-beside [margin & colls]
+  (<= (count (filter #(> (count %) 1) (apply map hash-set colls))) margin))
