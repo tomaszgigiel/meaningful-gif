@@ -14,6 +14,10 @@
 (defn- create-series? [create-output-path]
   (some? create-output-path))
 
+(defn- create-mov? [create-output-file]
+  (and (some? create-output-file)
+       (string/ends-with? create-output-file ".mov")))
+
 (defn- create-zip? [create-output-file]
   (and (some? create-output-file)
        (string/ends-with? create-output-file ".zip")))
@@ -56,6 +60,13 @@
                                                                     create-chunk-size
                                                                     create-qrcode-width
                                                                     create-qrcode-height))
+    (when (create-mov? create-output-file) (create/create-mov create-input-path
+                                                              create-output-file
+                                                              create-chunk-size
+                                                              create-qrcode-width
+                                                              create-qrcode-height
+                                                              create-qrcode-delay-time
+                                                              create-qrcode-repeat-count))
     (when (create-zip? create-output-file) (create/create-zip create-input-path
                                                               create-output-file))
     (when (extract-agif? extract-input-file) (extract/extract-agif extract-input-file

@@ -5,6 +5,7 @@
   (:import pl.tomaszgigiel.streams.Base64OutputStream)
   (:import pl.tomaszgigiel.streams.ChunkOutputStream)
   (:import pl.tomaszgigiel.streams.FountainCodeOutputStream)
+  (:import pl.tomaszgigiel.streams.MovOutputStream)
   (:import pl.tomaszgigiel.streams.PipedInputStream)
   (:import pl.tomaszgigiel.streams.QRCodeOutputStream)
   (:import pl.tomaszgigiel.streams.SeriesFileOutputStream)
@@ -25,6 +26,17 @@
 
 (defn create-series [input-path output-path output-name chunk-size qrcode-width qrcode-height]
   (with-open [s (-> (SeriesFileOutputStream. output-path output-name)
+                    (QRCodeOutputStream. qrcode-width qrcode-height)
+                    (ChunkOutputStream. chunk-size)
+                    FountainCodeOutputStream.
+                    Base64OutputStream.
+                    ZipOutputStream.)]
+    (.zipFolder s input-path)))
+
+(defn create-mov [input-path output-file chunk-size qrcode-width qrcode-height qrcode-delay-time qrcode-repeat-count]
+  (with-open [s (-> output-file
+                    FileOutputStream.
+                    (MovOutputStream. qrcode-delay-time qrcode-repeat-count)
                     (QRCodeOutputStream. qrcode-width qrcode-height)
                     (ChunkOutputStream. chunk-size)
                     FountainCodeOutputStream.

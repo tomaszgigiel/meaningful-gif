@@ -93,15 +93,15 @@
     (.setFromTree metadata format tree)
     (.writeToSequence image-writer (IIOImage. buffered-image nil metadata) nil)))
 
-(defn write-bytes [b off len image-writer delay-time repeat-count]
-  (write-image (bytes-to-image b off len) image-writer delay-time repeat-count))
-
 (defn begin [^OutputStream os]
   (let [image-output-stream (ImageIO/createImageOutputStream os)
         image-writer (->> "image/gif" ImageIO/getImageWritersByMIMEType .next)]
     (.setOutput image-writer image-output-stream)
     (.prepareWriteSequence image-writer nil)
     image-writer))
+
+(defn write-bytes [b off len image-writer delay-time repeat-count]
+  (write-image (bytes-to-image b off len) image-writer delay-time repeat-count))
 
 (defn end [^ImageWriter wr]
   (let [image-output-stream (.getOutput wr)]
